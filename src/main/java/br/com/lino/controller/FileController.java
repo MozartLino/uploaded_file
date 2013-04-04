@@ -1,7 +1,5 @@
 package br.com.lino.controller;
 
-import java.util.List;
-
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
@@ -26,15 +24,13 @@ public class FileController {
 		this.saveFileInDisc = saveFileInDisc;
 	}
 
-	@SuppressWarnings("static-access")
 	@Post("/file/upload")
-	public void upload(List<UploadedFile> files) {
+	public void upload(UploadedFile file) {
 
-		for (UploadedFile uploadedFile : files) {
-			saveFileInDisc.save(uploadedFile.getFile(), uploadedFile.getFileName());
-			String completePath = System.currentTimeMillis() + uploadedFile.getFileName();
-			converter.fileToThumbnail(completePath);
-		}
+		// for (UploadedFile uploadedFile : files) {
+		String completePath = saveFileInDisc.save(file.getFile(), file.getFileName());
+		converter.fileToThumbnail(completePath);
+		// }
 
 		result.use(Results.json()).from("ok").serialize();
 	}

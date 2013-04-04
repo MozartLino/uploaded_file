@@ -11,11 +11,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class SaveFileInDisc {
 
-	public static void save(InputStream stream, String path) {
+	public String save(InputStream stream, String path) {
 		File file = new File(path);
 
 		try {
 			IOUtils.copyLarge(stream, new FileOutputStream(file));
+			return file.getAbsolutePath();
 		} catch (IOException e) {
 			throw new IllegalStateException("Impossível realizar upload", e);
 		}

@@ -3,7 +3,7 @@
 <body>
 
 <form id="fileupload" action="file/upload" method="POST" enctype="multipart/form-data">
-  <input id="file" type="file" name="files[]" multiple>
+  <input id="file" type="file" name="file" multiple>
   <input type="submit">
 </form>
 
